@@ -7,6 +7,7 @@ public class Node : MonoBehaviour
     public Vector3 positionOffset;
 
     private GameObject turretOnNode;
+    [SerializeField] private GameObject SelectionOutline;
     private Renderer rend;
     private Color startColor;
 
@@ -18,32 +19,28 @@ public class Node : MonoBehaviour
             startColor = rend.material.color;
         }
     }
-
-    // Called by BuildManager to show visual feedback (Hovering)
+    
     public void HoverEnter()
     {
         if (rend != null && turretOnNode == null)
         {
-            rend.material.color = hoverColor;
+            SelectionOutline.SetActive(true);
         }
     }
-
-    // Called by BuildManager to reset the visual feedback
+    
     public void HoverExit()
     {
         if (rend != null)
         {
-            rend.material.color = startColor;
+            SelectionOutline.SetActive(false);
         }
     }
-
-    // Helper method to check if this tile already has a turret
+    
     public bool HasTurret()
     {
         return turretOnNode != null;
     }
-
-    // Assigns the built turret to this tile
+    
     public void SetTurret(GameObject turret)
     {
         turretOnNode = turret;

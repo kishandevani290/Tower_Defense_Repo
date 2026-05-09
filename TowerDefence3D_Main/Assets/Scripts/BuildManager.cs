@@ -7,9 +7,7 @@ public class BuildManager : MonoBehaviour
     [Header("Turret Prefabs")]
     public GameObject standardTurretPrefab;
     private GameObject turretToBuild;
-
-    [Header("Mobile Settings")]
-    [Tooltip("The layer mask assigned to your Node objects so the raycast only hits tiles.")]
+    
     public LayerMask nodeLayerMask;
 
     private Node currentlyHighlightedNode;
@@ -17,13 +15,10 @@ public class BuildManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance != null)
+        if (instance == null)
         {
-            Debug.LogError("More than one BuildManager in scene!");
-            Destroy(gameObject);
-            return;
+            instance = this;
         }
-        instance = this;
     }
 
     private void Start()
@@ -39,13 +34,10 @@ public class BuildManager : MonoBehaviour
 
     private void HandleMobileInput()
     {
-        // Check if there is at least one touch on the screen
         if (Input.touchCount > 0)
         {
-            Debug.Log("Touch");
             Touch touch = Input.GetTouch(0);
 
-            // 1. Raycast from the touch position into the 3D world
             Ray ray = mainCamera.ScreenPointToRay(touch.position);
             RaycastHit hit;
 
@@ -55,21 +47,16 @@ public class BuildManager : MonoBehaviour
 
                 if (touchedNode != null)
                 {
-                    Debug.Log("Node name" + touchedNode.name);
-                    // If we touch a new node, unhighlight the old one and highlight the new one
                     if (currentlyHighlightedNode != touchedNode)
                     {
                         ClearCurrentHighlight();
 
-                        // Only highlight if the node is empty
                         if (!touchedNode.HasTurret())
                         {
                             currentlyHighlightedNode = touchedNode;
                             currentlyHighlightedNode.HoverEnter();
                         }
                     }
-
-                    // 2. Build the turret when the user lifts their finger off the screen (TouchPhase.Ended)
                     if (touch.phase == TouchPhase.Ended)
                     {
                         if (currentlyHighlightedNode != null && !currentlyHighlightedNode.HasTurret())
@@ -78,15 +65,10 @@ public class BuildManager : MonoBehaviour
                         }
                         ClearCurrentHighlight();
                     }
-                }
-                else
-                {
-                    Debug.Log("Touch node is null i think");
-                }
+                }  
             }
             else
             {
-                // If the touch moved off any node, clear the highlight
                 ClearCurrentHighlight();
             }
         }
@@ -94,17 +76,9 @@ public class BuildManager : MonoBehaviour
 
     private void BuildTurretOn(Node node)
     {
-        if (turretToBuild == null)
-        {
-            Debug.LogWarning("No turret selected to build!");
-            return;
-        }
-
         Vector3 spawnPosition = node.transform.position + node.positionOffset;
-        GameObject turret = Instantiate(turretToBuild, spawnPosition, Quaternion.identity);
+        GameObject turret = Instantiate(GetTurretToBuild(), spawnPosition, Quaternion.identity);
         node.SetTurret(turret);
-
-        Debug.Log($"Turret successfully built on {node.gameObject.name} via mobile touch!");
     }
 
     private void ClearCurrentHighlight()
