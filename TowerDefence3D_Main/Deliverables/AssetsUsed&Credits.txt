@@ -1,0 +1,45 @@
+# Assets Used
+
+## 3D Models
+All 3D models are credited to:
+
+Kenney.nl — Tower Defence 3D Kit
+
+Website:
+https://kenney.nl/
+
+---
+
+## GUI Assets
+2D GUI assets were taken from:
+- Unity Asset Store
+
+---
+
+## Fonts
+Fonts were taken from:
+- Google Fonts
+
+Font style used:
+- Cartoon style font
+
+---
+
+## Sound Effects
+Sound effects and audio clips were taken from:
+- Pixabay Sounds
+
+These assets were used as free-to-use sounds.
+
+---
+
+## Particle Effects
+Particle effects were used from:
+- Epic Toon FX
+- Unity Asset Store
+
+---
+
+# Asset Credits
+
+Big thanks to all creators and asset providers for providing free and useful assets for learning and development projects.

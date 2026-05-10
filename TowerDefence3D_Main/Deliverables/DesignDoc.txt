@@ -1,0 +1,200 @@
+
+---
+
+# DesignDoc.md
+
+```md
+# Tower Defence (Lite) — Design Document
+
+## Project Goal
+
+The main goal of this project was to create a simple and clean Tower Defence game with:
+- Easy to manage systems
+- Expandable architecture
+- Mobile friendly placement system
+- Simple balancing
+
+The project was also focused on learning:
+- Scriptable Objects
+- Manager based architecture
+- Data saving
+- Game balancing basics
+
+---
+
+# Core Gameplay Loop
+
+1. Enemies spawn from spawn points
+2. Enemies move toward destination
+3. Player places turrets on nodes
+4. Turrets attack enemies
+5. Player earns coins after enemy death
+6. Coins are used to place more turrets
+7. Level completes after all enemies are defeated
+
+---
+
+# System Design
+
+## Sound System
+
+### SoundManager
+Handles:
+- Music
+- Sound Effects
+- Audio playback methods
+
+This keeps all audio calls centralized.
+
+---
+
+## Save System
+
+### Keys Class
+Stores all PlayerPrefs keys in one place.
+
+Benefits:
+- Avoids typo mistakes
+- Easier management
+- Cleaner code structure
+
+### DataManager
+Handles:
+- Coins
+- Turret unlocks
+- Level progress
+- Shop data
+
+This creates a single place for game data handling.
+
+---
+
+## Level System
+
+Levels are created using Scriptable Objects.
+
+Benefits:
+- Easy level creation
+- Reusable data
+- Cleaner workflow
+- Better scalability
+
+Demo levels are available for testing.
+
+---
+
+## Build System
+
+### BuildManager
+Responsible for:
+- Turret building
+- Placement checking
+- Build validation
+
+### Node System
+Each tile/node:
+- Detects player input
+- Stores placement state
+- Controls turret placement
+
+---
+
+# Enemy Design
+
+Each enemy has:
+- Health
+- Speed
+- Damage
+- Coin reward
+
+Enemy variations are created by changing stats instead of changing full logic.
+
+### Enemy Types
+
+| Enemy | 특징 |
+|---|---|
+| Enemy Type 1 | Basic enemy |
+| Enemy Type 2 | Faster movement |
+| Enemy Type 3 | Stronger enemy |
+
+---
+
+# Turret Design
+
+Turrets are designed with different:
+- Damage
+- Fire rate
+- Range
+
+The goal was to create simple gameplay variety.
+
+---
+
+# Balancing Notes
+
+## Coins
+Enemies reward coins after death.
+
+Balancing idea:
+- Strong enemies give more rewards
+- Player progression should feel steady
+
+## Difficulty
+Difficulty increases by:
+- Enemy speed
+- Enemy health
+- Spawn count
+
+## Placement Strategy
+The player must decide:
+- Where to place turrets
+- Which turret type to use
+- How to manage coins efficiently
+
+---
+
+# UI Design
+
+The UI follows:
+- Minimalistic design
+- Small cartoony style
+- Simple readable layout
+
+Goal:
+- Keep gameplay clean
+- Avoid too much UI clutter
+
+---
+
+# Future Improvements
+
+Possible future upgrades:
+- Upgrade system
+- More enemy types
+- Boss enemies
+- Wave system
+- Better VFX
+- Improved mobile controls
+- Turret upgrade tree
+- More maps
+
+---
+
+# Technical Notes
+
+- Uses PlayerPrefs for local saving
+- Uses Scriptable Objects for flexible data management
+- Modular manager based architecture
+- Touch input based placement system
+
+---
+
+# Conclusion
+
+This project helped in understanding:
+- Game architecture
+- Data management
+- Unity systems
+- Gameplay balancing
+- Tower Defence mechanics
+- Centralized Save System
