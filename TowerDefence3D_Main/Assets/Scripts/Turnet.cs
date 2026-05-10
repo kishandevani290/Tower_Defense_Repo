@@ -6,6 +6,7 @@ public class Turnet : MonoBehaviour
     public float fireRate = 1f;
     private float fireCountDown = 0f;
     public float Range = 15f;
+    public float Damagerate = 20f;
 
     private Transform target;
 

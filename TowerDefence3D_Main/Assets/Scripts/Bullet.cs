@@ -5,6 +5,8 @@ public class Bullet : MonoBehaviour
     private Transform Target;
 
     public float speed = 70f;
+    public float damage = 80f;
+
     public GameObject ImpactEffect;
 
     public void Fire(Transform _target)
@@ -37,10 +39,23 @@ public class Bullet : MonoBehaviour
     void HitTarget()
     {
         GameObject Effect = (GameObject)Instantiate(ImpactEffect,transform.position,transform.rotation);
+        if (Setting.settings.getsetSound == 0)
+        {
+            Effect.GetComponent<AudioSource>().enabled = false;
+            Debug.Log("Turn off Sound");
+        }
+        else if (Setting.settings.getsetSound == 1)
+        {
+            Effect.GetComponent<AudioSource>().enabled = true;
+            Effect.GetComponent<AudioSource>().Play();
+        }
         Destroy(Effect,2f);
 
-        Destroy(Target.gameObject);
+        Enemy enemy = Target.GetComponent<Enemy>();
+        if (enemy != null)
+        {
+            enemy.TakeDamage((int)damage);
+        }
         Destroy(gameObject);
     }
-
 }
